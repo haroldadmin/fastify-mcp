@@ -2,6 +2,13 @@
   "name": "fastify-mcp",
   "version": "0.0.1",
   "packageManager": "yarn@4.7.0",
+  "author": {
+    "name": "Kshitij Chauhan",
+    "url": "https://github.com/haroldadmin"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint .",
     "test": "jest",
