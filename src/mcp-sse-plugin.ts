@@ -28,6 +28,10 @@ export const fastifyMCPSSE: FastifyPluginCallback<MCPSSEPluginOptions> = (
 
     sessions.add(sessionId, transport);
 
+    reply.raw.on("close", () => {
+      sessions.remove(sessionId);
+    });
+
     fastify.log.info("Starting new session", { sessionId });
     await server.connect(transport);
   });

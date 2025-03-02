@@ -22,4 +22,8 @@ export class Sessions {
   get = (id: string): SSEServerTransport | undefined => {
     return this.sessions.get(id);
   };
+
+  get count() {
+    return this.sessions.size;
+  }
 }

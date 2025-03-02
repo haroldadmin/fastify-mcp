@@ -3,6 +3,9 @@ import fastify from "fastify";
 import { fastifyMCPSSE } from "./mcp-sse-plugin";
 import { Readable } from "node:stream";
 import { randomUUID } from "node:crypto";
+import { Sessions } from "./session-storage";
+import { setTimeout, setImmediate } from "node:timers/promises";
+import { finished } from "node:stream/promises";
 
 describe(fastifyMCPSSE.name, () => {
   it("should handle SSE connections successfully", async () => {
@@ -73,6 +76,38 @@ describe(fastifyMCPSSE.name, () => {
 
     expect(res.statusCode).toBe(202);
     expect(res.body).toBe("Accepted");
+  });
+
+  it("should remove sessions when the connection is closed", async () => {
+    const app = fastify({});
+    const mcpServer = new Server({
+      name: "test",
+      version: "1.0.0",
+    });
+
+    const sessions = new Sessions();
+    app.register(fastifyMCPSSE, {
+      server: mcpServer,
+      sessions,
+    });
+
+    expect(sessions.count).toBe(0);
+
+    const {
+      raw: { res },
+    } = await app.inject({
+      method: "GET",
+      url: "/sse",
+      payloadAsStream: true,
+    });
+
+    expect(sessions.count).toBe(1);
+
+    res.end();
+
+    await setImmediate();
+
+    expect(sessions.count).toBe(0);
   });
 });
 
