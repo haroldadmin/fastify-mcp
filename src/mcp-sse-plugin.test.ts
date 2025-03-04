@@ -1,11 +1,10 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index";
 import fastify from "fastify";
-import { fastifyMCPSSE } from "./mcp-sse-plugin";
-import { Readable } from "node:stream";
 import { randomUUID } from "node:crypto";
+import { Readable } from "node:stream";
+import { setImmediate } from "node:timers/promises";
+import { fastifyMCPSSE } from "./mcp-sse-plugin";
 import { Sessions } from "./session-storage";
-import { setTimeout, setImmediate } from "node:timers/promises";
-import { finished } from "node:stream/promises";
 
 describe(fastifyMCPSSE.name, () => {
   it("should handle SSE connections successfully", async () => {
