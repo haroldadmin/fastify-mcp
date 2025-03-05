@@ -1,4 +1,4 @@
-import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse";
+import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { Sessions } from "./session-storage";
 
 describe(Sessions.name, () => {
@@ -20,7 +20,7 @@ describe(Sessions.name, () => {
     sessions.add(sessionId, transport);
 
     expect(() => sessions.add(sessionId, transport)).toThrow(
-      "Session already exists"
+      "Session already exists",
     );
   });
 

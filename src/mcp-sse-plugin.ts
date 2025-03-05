@@ -13,7 +13,7 @@ type MCPSSEPluginOptions = {
 export const fastifyMCPSSE: FastifyPluginCallback<MCPSSEPluginOptions> = (
   fastify,
   options,
-  done
+  done,
 ) => {
   const {
     server,
