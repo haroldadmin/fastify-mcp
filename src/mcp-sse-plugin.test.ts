@@ -1,4 +1,4 @@
-import { Server } from "@modelcontextprotocol/sdk/server/index";
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import fastify from "fastify";
 import { randomUUID } from "node:crypto";
 import { Readable } from "node:stream";
