@@ -1,6 +1,6 @@
 {
   "name": "fastify-mcp",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "packageManager": "yarn@4.7.0",
   "author": {
     "name": "Kshitij Chauhan",
