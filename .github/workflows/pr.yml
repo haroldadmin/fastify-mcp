@@ -1,0 +1,29 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'yarn'
+    
+    - name: Install dependencies
+      run: yarn install --immutable
+    
+    - name: Type check
+      run: yarn build
+    
+    - name: Lint
+      run: yarn lint
+    
+    - name: Test
+      run: yarn test 
