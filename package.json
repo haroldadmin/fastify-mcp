@@ -6,6 +6,8 @@
     "name": "Kshitij Chauhan",
     "url": "https://github.com/haroldadmin"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
