@@ -1,5 +1,5 @@
-import type { Server } from "@modelcontextprotocol/sdk/server/index";
-import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse";
+import type { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { FastifyPluginCallback, FastifyRequest } from "fastify";
 import { Sessions } from "./session-storage";
 
