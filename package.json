@@ -6,6 +6,13 @@
     "name": "Kshitij Chauhan",
     "url": "https://github.com/haroldadmin"
   },
+  "keywords": [
+    "fastify",
+    "modelcontextprotocol",
+    "mcp",
+    "ai",
+    "anthropic"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
