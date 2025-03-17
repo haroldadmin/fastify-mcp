@@ -6,6 +6,9 @@
     "name": "Kshitij Chauhan",
     "url": "https://github.com/haroldadmin"
   },
+  "repository": {
+    "url": "https://github.com/haroldadmin/fastify-mcp"
+  },
   "keywords": [
     "fastify",
     "modelcontextprotocol",
