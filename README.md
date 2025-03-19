@@ -59,6 +59,7 @@ The `Sessions` class emits the following events:
 
 - `connected`: Emitted when a new session is added.
 - `terminated`: Emitted when a session is removed.
+- `error`: Emitted when an asynchronous event handler throws an error.
 
 ```ts
 const sessions = new Sessions();
