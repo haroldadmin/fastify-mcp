@@ -1,9 +1,17 @@
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import { EventEmitter } from "node:events";
 
-export class Sessions {
+type SessionEvents = {
+  connected: [string];
+  terminated: [string];
+  error: [unknown];
+};
+
+export class Sessions extends EventEmitter<SessionEvents> {
   private readonly sessions: Map<string, SSEServerTransport>;
 
   constructor() {
+    super({ captureRejections: true });
     this.sessions = new Map();
   }
 
@@ -13,10 +21,12 @@ export class Sessions {
     }
 
     this.sessions.set(id, transport);
+    this.emit("connected", id);
   };
 
   remove = (id: string) => {
     this.sessions.delete(id);
+    this.emit("terminated", id);
   };
 
   get = (id: string): SSEServerTransport | undefined => {
