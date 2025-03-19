@@ -7,7 +7,10 @@ type SessionEvents = {
   error: [unknown];
 };
 
-export class Sessions extends EventEmitter<SessionEvents> {
+export class Sessions
+  extends EventEmitter<SessionEvents>
+  implements Iterable<SSEServerTransport>
+{
   private readonly sessions: Map<string, SSEServerTransport>;
 
   constructor() {
@@ -35,5 +38,9 @@ export class Sessions extends EventEmitter<SessionEvents> {
 
   get count() {
     return this.sessions.size;
+  }
+
+  [Symbol.iterator]() {
+    return this.sessions.values();
   }
 }

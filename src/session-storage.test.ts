@@ -116,6 +116,16 @@ describe(Sessions.name, () => {
     expect(thrownValue).toBeInstanceOf(Error);
     expect((thrownValue as Error).message).toBe("test");
   });
+
+  it("should be iterable", () => {
+    const sessions = new Sessions();
+    const sessionId = "123";
+
+    sessions.add(sessionId, fakeTransport());
+    sessions.add("456", fakeTransport());
+
+    expect(Array.from(sessions)).toHaveLength(2);
+  });
 });
 
 function fakeTransport(): SSEServerTransport {
