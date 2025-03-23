@@ -2,12 +2,15 @@ import type { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { FastifyPluginCallback, FastifyRequest } from "fastify";
 import { Sessions } from "./session-storage";
+import { setInterval } from "node:timers";
+import { randomUUID } from "node:crypto";
 
 type MCPSSEPluginOptions = {
   server: Server;
   sessions?: Sessions;
   sseEndpoint?: string;
   messagesEndpoint?: string;
+  pingInterval?: number;
 };
 
 export const fastifyMCPSSE: FastifyPluginCallback<MCPSSEPluginOptions> = (
@@ -20,16 +23,20 @@ export const fastifyMCPSSE: FastifyPluginCallback<MCPSSEPluginOptions> = (
     sessions = new Sessions(),
     sseEndpoint = "/sse",
     messagesEndpoint = "/messages",
+    pingInterval = 1000,
   } = options;
 
   fastify.get(sseEndpoint, async (_, reply) => {
     const transport = new SSEServerTransport(messagesEndpoint, reply.raw);
-    const sessionId = transport.sessionId;
 
+    const sessionId = transport.sessionId;
     sessions.add(sessionId, transport);
+
+    const stopPings = schedulePings(transport, pingInterval);
 
     reply.raw.on("close", () => {
       sessions.remove(sessionId);
+      stopPings();
     });
 
     fastify.log.info("Starting new session", { sessionId });
@@ -70,4 +77,17 @@ function extractSessionId(req: FastifyRequest) {
   }
 
   return sessionId;
+}
+
+function schedulePings(session: SSEServerTransport, intervalMs: number) {
+  const timeout = setInterval(() => {
+    console.log("pinging", session.sessionId);
+    session.send({
+      jsonrpc: "2.0",
+      id: randomUUID(),
+      method: "ping",
+    });
+  }, intervalMs);
+
+  return () => clearInterval(timeout);
 }
