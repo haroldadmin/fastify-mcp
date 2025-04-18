@@ -43,7 +43,7 @@
     "typescript-eslint": "^8.25.0"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.6.1",
+    "@modelcontextprotocol/sdk": "1.9.0",
     "fastify": "^5.2.1"
   }
 }
