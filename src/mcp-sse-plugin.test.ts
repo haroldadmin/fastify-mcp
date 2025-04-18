@@ -26,7 +26,7 @@ describe(fastifyMCPSSE.name, () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.headers["content-type"]).toBe("text/event-stream");
-    expect(response.headers["cache-control"]).toBe("no-cache");
+    expect(response.headers["cache-control"]).toBe("no-cache, no-transform");
     expect(response.headers["connection"]).toBe("keep-alive");
 
     const lines = response.stream().read().toString("utf-8").split("\n");
