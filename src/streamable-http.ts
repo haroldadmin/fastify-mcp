@@ -9,6 +9,27 @@ type StreamableHttpPluginOptions =
   | StatefulStreamableHttpPluginOptions
   | StatelessStreamableHttpPluginOptions;
 
+/**
+ * A plugin to run MCP servers using the Streamable HTTP Transport over Fastify.
+ * Supports both stateless and stateful sessions.
+ *
+ * @example
+ * ```ts
+ * import { fastify } from "fastify";
+ * import { streamableHttp } from "@modelcontextprotocol/fastify-streamable-http";
+ * import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+ *
+ * const app = fastify();
+ *
+ * app.register(streamableHttp, {
+ *   stateful: false,
+ *   mcpEndpoint: '/mcp',
+ *   createServer: () => new McpServer({ name: 'my-server', version: '1.0.0' }).server,
+ * });
+ *
+ * await app.listen({ port: 3000 });
+ * ```
+ */
 export const streamableHttp: FastifyPluginAsync<
   StreamableHttpPluginOptions
 > = async (fastify, options) => {
