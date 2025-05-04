@@ -422,12 +422,13 @@ describe(streamableHttp.name, () => {
 
     it("should handle a DELETE request with a session ID for an existing session", async () => {
       const app = fastify();
+      const sessions = new Sessions<StreamableHTTPServerTransport>();
 
       app.register(streamableHttp, {
         stateful: true,
         createServer,
         mcpEndpoint: "/mcp",
-        sessions: new Sessions<StreamableHTTPServerTransport>(),
+        sessions,
       });
 
       const initResponse = await app.inject({
@@ -454,19 +455,19 @@ describe(streamableHttp.name, () => {
 
       const sessionId = initResponse.headers["mcp-session-id"];
       expect(sessionId).toBeDefined();
+      expect(sessions.get(sessionId as string)).toBeDefined();
 
       const deleteResponse = await app.inject({
         method: "DELETE",
         url: "/mcp",
         headers: {
           accept: "application/json, text/event-stream",
-          "content-type": "application/json",
           "mcp-session-id": sessionId,
         },
       });
 
       expect(deleteResponse.statusCode).toBe(200);
-      expect(deleteResponse.headers["mcp-session-id"]).toBe(sessionId);
+      expect(sessions.get(sessionId as string)).toBeUndefined();
     });
   });
 });

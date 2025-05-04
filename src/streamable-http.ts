@@ -148,6 +148,10 @@ const statefulPlugin: FastifyPluginAsync<
     }
 
     await transport.handleRequest(req.raw, reply.raw, req.body);
+
+    // The SDK never seems to trigger the onclose event, so we
+    // should manually remove the session on a DELETE request
+    sessions.remove(sessionId);
   });
 };
 
