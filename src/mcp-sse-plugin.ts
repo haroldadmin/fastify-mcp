@@ -5,7 +5,7 @@ import { Sessions } from "./session-storage";
 
 type MCPSSEPluginOptions = {
   server: Server;
-  sessions?: Sessions;
+  sessions?: Sessions<SSEServerTransport>;
   sseEndpoint?: string;
   messagesEndpoint?: string;
 };
@@ -17,7 +17,7 @@ export const fastifyMCPSSE: FastifyPluginCallback<MCPSSEPluginOptions> = (
 ) => {
   const {
     server,
-    sessions = new Sessions(),
+    sessions = new Sessions<SSEServerTransport>(),
     sseEndpoint = "/sse",
     messagesEndpoint = "/messages",
   } = options;
