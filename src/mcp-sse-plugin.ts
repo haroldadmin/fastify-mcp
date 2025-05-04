@@ -5,11 +5,18 @@ import { Sessions } from "./session-storage";
 
 type MCPSSEPluginOptions = {
   server: Server;
-  sessions?: Sessions;
+  sessions?: Sessions<SSEServerTransport>;
   sseEndpoint?: string;
   messagesEndpoint?: string;
 };
 
+/**
+ * A plugin to run MCP servers using HTTP with SSE Transport over Fastify.
+ *
+ * @deprecated Use {@link streamableHttp} instead. The HTTP with SSE Transport
+ * has been deprecated from MCP protocol version 2025-03-26 onwards. Consider
+ * migrating to the Streamable HTTP Transport instead.
+ */
 export const fastifyMCPSSE: FastifyPluginCallback<MCPSSEPluginOptions> = (
   fastify,
   options,
@@ -17,7 +24,7 @@ export const fastifyMCPSSE: FastifyPluginCallback<MCPSSEPluginOptions> = (
 ) => {
   const {
     server,
-    sessions = new Sessions(),
+    sessions = new Sessions<SSEServerTransport>(),
     sseEndpoint = "/sse",
     messagesEndpoint = "/messages",
   } = options;

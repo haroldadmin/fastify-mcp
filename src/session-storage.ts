@@ -1,4 +1,4 @@
-import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import type { Transport } from "@modelcontextprotocol/sdk/shared/transport";
 import { EventEmitter } from "node:events";
 
 type SessionEvents = {
@@ -7,18 +7,18 @@ type SessionEvents = {
   error: [unknown];
 };
 
-export class Sessions
+export class Sessions<T extends Transport>
   extends EventEmitter<SessionEvents>
-  implements Iterable<SSEServerTransport>
+  implements Iterable<T>
 {
-  private readonly sessions: Map<string, SSEServerTransport>;
+  private readonly sessions: Map<string, T>;
 
   constructor() {
     super({ captureRejections: true });
     this.sessions = new Map();
   }
 
-  add = (id: string, transport: SSEServerTransport) => {
+  add = (id: string, transport: T) => {
     if (this.sessions.has(id)) {
       throw new Error("Session already exists");
     }
@@ -32,7 +32,7 @@ export class Sessions
     this.emit("terminated", id);
   };
 
-  get = (id: string): SSEServerTransport | undefined => {
+  get = (id: string): T | undefined => {
     return this.sessions.get(id);
   };
 

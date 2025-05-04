@@ -1,4 +1,5 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import fastify from "fastify";
 import { randomUUID } from "node:crypto";
 import { Readable } from "node:stream";
@@ -84,7 +85,7 @@ describe(fastifyMCPSSE.name, () => {
       version: "1.0.0",
     });
 
-    const sessions = new Sessions();
+    const sessions = new Sessions<SSEServerTransport>();
     app.register(fastifyMCPSSE, {
       server: mcpServer,
       sessions,
