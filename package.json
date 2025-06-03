@@ -1,6 +1,6 @@
 {
   "name": "fastify-mcp",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "packageManager": "yarn@4.7.0",
   "author": {
     "name": "Kshitij Chauhan",
@@ -47,6 +47,5 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",
     "fastify": "^5.2.1"
-  },
-  "stableVersion": "2.0.0"
+  }
 }
