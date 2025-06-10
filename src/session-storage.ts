@@ -1,4 +1,4 @@
-import type { Transport } from "@modelcontextprotocol/sdk/shared/transport";
+import type { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import { EventEmitter } from "node:events";
 
 type SessionEvents = {
