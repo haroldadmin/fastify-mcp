@@ -112,7 +112,11 @@ const statefulPlugin: FastifyPluginAsync<
         return invalidSessionId(reply);
       }
 
-      await transport.handleRequest(injectAuthData(req.raw), reply.raw, req.body);
+      await transport.handleRequest(
+        injectAuthData(req.raw),
+        reply.raw,
+        req.body,
+      );
     }
   });
 
@@ -178,9 +182,8 @@ function createStatefulTransport(
   return newTransport;
 }
 
-function injectAuthData(reqRaw: IncomingMessage & { auth?: AuthInfo },
-) {
-  const { authorization } = reqRaw.headers
+function injectAuthData(reqRaw: IncomingMessage & { auth?: AuthInfo }) {
+  const { authorization } = reqRaw.headers;
   if (authorization) {
     reqRaw.auth = { token: authorization } as AuthInfo;
   }
