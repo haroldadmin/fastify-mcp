@@ -1,6 +1,6 @@
 {
   "name": "fastify-mcp",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "packageManager": "yarn@4.7.0",
   "author": {
     "name": "Kshitij Chauhan",
@@ -45,7 +45,7 @@
     "typescript-eslint": "^8.25.0"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1",
+    "@modelcontextprotocol/sdk": "^1.13.2",
     "fastify": "^5.2.1"
   }
 }

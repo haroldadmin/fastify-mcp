@@ -888,9 +888,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/sdk@npm:^1.12.1":
-  version: 1.12.1
-  resolution: "@modelcontextprotocol/sdk@npm:1.12.1"
+"@modelcontextprotocol/sdk@npm:^1.13.2":
+  version: 1.13.2
+  resolution: "@modelcontextprotocol/sdk@npm:1.13.2"
   dependencies:
     ajv: "npm:^6.12.6"
     content-type: "npm:^1.0.5"
@@ -903,7 +903,7 @@ __metadata:
     raw-body: "npm:^3.0.0"
     zod: "npm:^3.23.8"
     zod-to-json-schema: "npm:^3.24.1"
-  checksum: 10c0/19daf4bc01373a8bd816faa6e8b139c20a56ae4c9cf25c6e900fab443b34e44bcf699a61612cf421c6480d803230003576b12823a04804dc71d7007f530677ac
+  checksum: 10c0/f0c41af0f39dbbbfa4c2c3840611806f102987b8a6bc8bf9c4b2adf415ac5655c880935acfd758facb78120dd30a833133ad3398a0f623ee701f80c0ccec9d63
   languageName: node
   linkType: hard
 
@@ -2513,7 +2513,7 @@ __metadata:
   resolution: "fastify-mcp@workspace:."
   dependencies:
     "@eslint/js": "npm:^9.21.0"
-    "@modelcontextprotocol/sdk": "npm:^1.12.1"
+    "@modelcontextprotocol/sdk": "npm:^1.13.2"
     "@types/jest": "npm:^29.5.14"
     "@types/node": "npm:^22.13.8"
     eslint: "npm:^9.21.0"
