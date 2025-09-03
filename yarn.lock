@@ -888,7 +888,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@modelcontextprotocol/sdk@npm:^1.15.1":
+"@modelcontextprotocol/sdk@npm:^1.16.0":
   version: 1.17.5
   resolution: "@modelcontextprotocol/sdk@npm:1.17.5"
   dependencies:
@@ -2514,7 +2514,7 @@ __metadata:
   resolution: "fastify-mcp@workspace:."
   dependencies:
     "@eslint/js": "npm:^9.21.0"
-    "@modelcontextprotocol/sdk": "npm:^1.15.1"
+    "@modelcontextprotocol/sdk": "npm:^1.16.0"
     "@types/jest": "npm:^29.5.14"
     "@types/node": "npm:^22.13.8"
     eslint: "npm:^9.21.0"
