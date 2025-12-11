@@ -1,8 +1,10 @@
+import type { AuthInfo } from "@modelcontextprotocol/sdk/server/auth/types.js";
 import type { Server } from "@modelcontextprotocol/sdk/server/index.d.ts";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { isInitializeRequest } from "@modelcontextprotocol/sdk/types.js";
 import { FastifyPluginAsync, FastifyReply } from "fastify";
 import { randomUUID } from "node:crypto";
+import { IncomingMessage } from "node:http";
 import { Sessions } from "./session-storage";
 
 type StreamableHttpPluginOptions =
@@ -110,7 +112,11 @@ const statefulPlugin: FastifyPluginAsync<
         return invalidSessionId(reply);
       }
 
-      await transport.handleRequest(req.raw, reply.raw, req.body);
+      await transport.handleRequest(
+        injectAuthData(req.raw),
+        reply.raw,
+        req.body,
+      );
     }
   });
 
@@ -174,6 +180,14 @@ function createStatefulTransport(
   };
 
   return newTransport;
+}
+
+function injectAuthData(reqRaw: IncomingMessage & { auth?: AuthInfo }) {
+  const { authorization } = reqRaw.headers;
+  if (authorization) {
+    reqRaw.auth = { token: authorization } as AuthInfo;
+  }
+  return reqRaw;
 }
 
 function invalidSessionId(reply: FastifyReply): void {
