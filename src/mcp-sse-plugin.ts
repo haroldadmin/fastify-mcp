@@ -1,7 +1,7 @@
 import type { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { FastifyPluginCallback, FastifyRequest } from "fastify";
-import { Sessions } from "./session-storage";
+import { Sessions } from "./session-storage.js";
 
 type MCPSSEPluginOptions = {
   server: Server;
@@ -39,7 +39,7 @@ export const fastifyMCPSSE: FastifyPluginCallback<MCPSSEPluginOptions> = (
       sessions.remove(sessionId);
     });
 
-    fastify.log.info("Starting new session", { sessionId });
+    fastify.log.info({ sessionId }, "Starting new session");
     await server.connect(transport);
   });
 

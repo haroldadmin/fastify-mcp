@@ -3,7 +3,7 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import { isInitializeRequest } from "@modelcontextprotocol/sdk/types.js";
 import { FastifyPluginAsync, FastifyReply } from "fastify";
 import { randomUUID } from "node:crypto";
-import { Sessions } from "./session-storage";
+import { Sessions } from "./session-storage.js";
 
 type StreamableHttpPluginOptions =
   | StatefulStreamableHttpPluginOptions
