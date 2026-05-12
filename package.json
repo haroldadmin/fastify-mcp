@@ -1,6 +1,6 @@
 {
   "name": "fastify-mcp",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "type": "module",
   "packageManager": "yarn@4.7.0",
   "author": {
